@@ -1,10 +1,42 @@
+import List from "components/List/list";
+import Task from "components/Task/task";
 import React from "react";
-
-const Board = ({ isLoggedIn }) => {
-  return isLoggedIn ? (
-    <button> Se déconnecter</button>
-  ) : (
-    <button>Se connecter</button>
+const Board = () => {
+  return (
+    <div className="flex flex-col">
+      <div className="flex">
+        <div className="w-1/3">
+          à faire
+          <List>
+            <Task />
+            <Task />
+            <Task />
+            <Task />
+            <Task />
+            <Task />
+          </List>
+        </div>
+        <div className="w-1/3">
+          en cours
+          <List>
+            <Task />
+            <Task />
+            <Task />
+          </List>
+        </div>
+        <div className="w-1/3">
+          terminé
+          <List>
+            <Task />
+            <Task />
+            <Task />
+            <Task />
+            <Task />
+            <Task />
+          </List>
+        </div>
+      </div>
+    </div>
   );
 };
 
