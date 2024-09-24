@@ -1,6 +1,7 @@
 import List from "components/List/list";
 import ModalTask from "components/Task/taskForm";
 import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 export const TaskState = {
   Todo: "Todo",
@@ -88,9 +89,25 @@ const Board = () => {
     },
   ]);
 
+  const redirect = useLocation();
+
+  const getTasksStateFromURL  = () => {
+    return redirect.pathname === "/todo" ? TaskState.Todo : redirect.pathname === "/doing" ? TaskState.Doing :  redirect.pathname === "/done" ? TaskState.Done : null ;
+  }
+
+  const filteredTasks = getTasksStateFromURL() ? tasksList.filter((task) => task.state === getTasksStateFromURL()) : tasksList ;
+
   const handleCreateTask = () => {
     setModalVisiblee(true);
   };
+
+  const handleMouseDown = (e) => {
+    e.target.style.color = "green";
+  };
+  const handleMouseLeave = (e) => {
+    e.target.style.color = "";
+  };
+
 
   return (
     <div className="flex flex-col">
@@ -100,26 +117,25 @@ const Board = () => {
       >
         Ajouter une tâche
       </button>
+
+
       <div className="flex">
-        <div className="w-1/3">
+        <Link to="/todo" className="w-1/3" onMouseUpCapture={handleMouseDown} onMouseLeave={handleMouseLeave}>
           à faire
-          <List
-            taskArray={tasksList.filter((t) => t.state == TaskState.Todo)}
-          />
-        </div>
-        <div className="w-1/3">
+        </Link>
+        <Link to="/doing" className="w-1/3" onMouseDown={handleMouseDown} onMouseLeave={handleMouseLeave}>
           en cours
-          <List
-            taskArray={tasksList.filter((t) => t.state == TaskState.Doing)}
-          />
-        </div>
-        <div className="w-1/3">
+        </Link>
+        <Link to="/done" className="w-1/3" onMouseDown={handleMouseDown} onMouseLeave={handleMouseLeave}>
           terminé
-          <List
-            taskArray={tasksList.filter((t) => t.state == TaskState.Done)}
-          />
-        </div>
+        </Link>
       </div>
+
+      <div className="flex">
+        <List taskArray={ filteredTasks }/>
+      </div>
+
+      
       {modalVisible && (
         <ModalTask
           setModalVisible={setModalVisiblee}
