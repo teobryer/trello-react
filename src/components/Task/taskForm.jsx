@@ -1,13 +1,17 @@
+import { TaskState } from "components/Board/board";
 import React, { useEffect, useRef } from "react";
 
-const ModalTask = ({ setModalVisible, setTaskList }) => {
-  const modalRef = useRef(null);
+const ModalTask = ({ setModalVisible, setTaskList, tasksList }) => {
+  const modalTaskRef = useRef(null);
   useEffect(() => {
     const handleClickOutside = (event) => {
       console.log(event.target);
-      console.log(modalRef.current);
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        setModalVisible(false);
+      console.log(modalTaskRef.current);
+      if (
+        modalTaskRef.current &&
+        !modalTaskRef.current.contains(event.target)
+      ) {
+        //setModalVisible(false);
       }
     };
 
@@ -32,28 +36,16 @@ const ModalTask = ({ setModalVisible, setTaskList }) => {
         <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
           <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
             <div
-              ref={modalRef}
+              ref={modalTaskRef}
               className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4"
             >
-              <div className="sm:flex sm:items-start">
-                <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                  <svg
-                    className="h-6 w-6 text-red-600"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
-                    />
-                  </svg>
-                </div>
+              <div className="sm:items-start">
                 <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                  <TaskFrom />
+                  <TaskFrom
+                    setVisible={setModalVisible}
+                    setTaskList={setTaskList}
+                    tasksList={tasksList}
+                  />
                 </div>
               </div>
             </div>
@@ -66,18 +58,31 @@ const ModalTask = ({ setModalVisible, setTaskList }) => {
 
 export default ModalTask;
 
-const TaskFrom = () => {
-  const nameRef = useRef(null);
-  const emailRef = useRef(null);
-  const messageRef = useRef(null);
+const TaskFrom = ({ setTaskList, tasksList, setVisible }) => {
+  const taskNameRef = useRef(null);
+  const stateRef = useRef(null);
+  const descriptionRef = useRef(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Nom:", nameRef.current.value);
-    console.log("Email:", emailRef.current.value);
-    console.log("Message:", messageRef.current.value);
+    console.log("Nom:", taskNameRef.current.value);
+    console.log("état:", stateRef.current.value);
+    console.log("description:", descriptionRef.current.value);
 
-    // Envoyer les données à un serveur ici
+    setTaskList([
+      ...tasksList,
+      {
+        taskName: taskNameRef.current.value,
+        state: stateRef.current.value,
+        description: descriptionRef.current.value,
+      },
+    ]);
+    setVisible(false);
+    console.log(tasksList);
+  };
+
+  const cancel = (event) => {
+    setVisible(false);
   };
 
   return (
@@ -93,50 +98,63 @@ const TaskFrom = () => {
           type="text"
           id="name"
           name="name"
-          ref={nameRef}
+          ref={taskNameRef}
           className="mt-1 p-2 w-full border border-gray-300 rounded-md   
    shadow-sm"
         />
       </div>
       <div>
         <label
-          htmlFor="email"
+          htmlFor="state"
           className="block text-sm font-medium text-gray-700"
         >
-          Email
+          État
         </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          ref={emailRef}
+        <select
+          id="state"
+          name="state"
+          ref={stateRef}
+          className="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm"
+        >
+          {Object.keys(TaskState).map((state) => (
+            <option key={state} value={TaskState[state]}>
+              {state}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label
+          htmlFor="description"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Description
+        </label>
+        <textarea
+          id="description"
+          name="description"
+          rows={4}
+          ref={descriptionRef}
           className="mt-1 p-2   
    w-full border border-gray-300 rounded-md shadow-sm"
         />
       </div>
       <div>
-        <label
-          htmlFor="message"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Message
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          rows={4}
-          ref={messageRef}
-          className="mt-1 p-2   
-   w-full border border-gray-300 rounded-md shadow-sm"
-        />
-      </div>
-      <button
-        type="submit"
-        className="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-medium   
+        <button
+          type="submit"
+          className="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-medium   
    text-white hover:bg-gray-900"
-      >
-        Envoyer
-      </button>
+        >
+          Envoyer
+        </button>
+        <button
+          onClick={cancel}
+          className="inline-flex items-center px-4 py-2 ml-5 bg-gray-800 border border-transparent rounded-md font-medium   
+   text-white hover:bg-gray-900"
+        >
+          Annuler
+        </button>
+      </div>
     </form>
   );
 };
