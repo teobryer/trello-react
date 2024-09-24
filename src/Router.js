@@ -17,6 +17,9 @@ const Router = ({ isLoggedIn }) => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/board" element={<Board />} />
+      <Route path="/todo" element={<Board />} />
+      <Route path="/doing" element={<Board />} />
+      <Route path="/done" element={<Board />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<ContactForm />} />
       <Route path="/contactRef" element={<ContactFormWithRef />} />
