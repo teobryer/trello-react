@@ -1,11 +1,10 @@
 import React, { useRef, useState } from "react";
 import ModalContact from "./modalContact";
 
-function ContactFormWithRef() {
+const ContactFormWithRef = () => {
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const messageRef = useRef(null);
-  const modalRef = useRef(null);
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -87,6 +86,6 @@ function ContactFormWithRef() {
       )}
     </form>
   );
-}
+};
 
 export default ContactFormWithRef;
