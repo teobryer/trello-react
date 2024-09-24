@@ -39,7 +39,12 @@ function UserData() {
 
   return (
     <div>
-      <button onClick={fetchDataWithEffect}>Charger les données</button>
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        onClick={fetchDataWithoutUseEffect}
+      >
+        Charger les données
+      </button>
       {isLoading ? (
         <p>Chargement des données...</p>
       ) : userData ? (

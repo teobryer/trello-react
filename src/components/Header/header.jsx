@@ -1,7 +1,9 @@
+import useMousePosition from "hooks/MousePosition/mousePosition";
 import React from "react";
 import { NavLink } from "react-router-dom";
 
 const Header = ({ connectChange, isChecked }) => {
+  const { x, y } = useMousePosition();
   return (
     <header className="bg-white">
       <nav
@@ -49,6 +51,18 @@ const Header = ({ connectChange, isChecked }) => {
           </NavLink>
           <NavLink
             className="text-sm font-semibold leading-6 text-gray-900"
+            to="/contact"
+          >
+            Contact
+          </NavLink>
+          <NavLink
+            className="text-sm font-semibold leading-6 text-gray-900"
+            to="/contactRef"
+          >
+            ContactRef
+          </NavLink>
+          <NavLink
+            className="text-sm font-semibold leading-6 text-gray-900"
             to="/board"
           >
             Trello
@@ -60,11 +74,18 @@ const Header = ({ connectChange, isChecked }) => {
           >
             About
           </NavLink>
+
+          <div>
+            <p>
+              ({x}, {y})
+            </p>
+          </div>
           <div
             className="text-sm w-12 h-6 bg-gray-900 rounded-full"
             onClick={connectChange}
           >
             <input type="checkbox" className="sr-only" checked={isChecked} />
+
             <span
               className={`absolute block w-6 h-6 rounded-full bg-white shadow-md transition duration-500 ease-in-out transform ${
                 isChecked ? "translate-x-6" : "translate-x-0"

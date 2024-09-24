@@ -1,13 +1,11 @@
 import DocumentTitle from "components/DocumentTitle/documentTitle";
 import UserData from "components/UserData/userData";
-import React, { useState } from "react";
+import useDocumentTitleCounter from "hooks/counter/counter";
+import React from "react";
 
 const Home = () => {
-  const [count, setCount] = useState(0);
+  const { count, increment } = useDocumentTitleCounter(5);
 
-  const increment = () => {
-    setCount(count + 1);
-  };
   return (
     <div>
       Accueil

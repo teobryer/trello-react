@@ -1,5 +1,7 @@
 import About from "components/About/about";
 import Board from "components/Board/board";
+import ContactForm from "components/Contact/contactForm";
+import ContactFormWithRef from "components/Contact/contactFormWithRef";
 import Home from "components/Home/home";
 import Login from "components/Login/login";
 import NotFound from "components/NotFound/notFound";
@@ -16,6 +18,8 @@ const Router = ({ isLoggedIn }) => {
       <Route path="/login" element={<Login />} />
       <Route path="/board" element={<Board />} />
       <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<ContactForm />} />
+      <Route path="/contactRef" element={<ContactFormWithRef />} />
       <Route path="/profile" />
       <Route
         path="/user/:id"
