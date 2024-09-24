@@ -1,6 +1,7 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ connectChange, isChecked }) => {
   return (
     <header className="bg-white">
       <nav
@@ -40,20 +41,45 @@ const Header = () => {
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Features
-          </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <NavLink
+            className="text-sm font-semibold leading-6 text-gray-900"
+            to="/"
+          >
+            Home
+          </NavLink>
+          <NavLink
+            className="text-sm font-semibold leading-6 text-gray-900"
+            to="/board"
+          >
             Trello
-          </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Company
-          </a>
+          </NavLink>
+
+          <NavLink
+            className="text-sm font-semibold leading-6 text-gray-900"
+            to="/about"
+          >
+            About
+          </NavLink>
+          <div
+            className="text-sm w-12 h-6 bg-gray-900 rounded-full"
+            onClick={connectChange}
+          >
+            <input type="checkbox" className="sr-only" checked={isChecked} />
+            <span
+              className={`absolute block w-6 h-6 rounded-full bg-white shadow-md transition duration-500 ease-in-out transform ${
+                isChecked ? "translate-x-6" : "translate-x-0"
+              }`}
+            ></span>
+          </div>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
+          <NavLink
+            className="text-sm font-semibold leading-6 text-gray-900"
+            to="/user/1"
+          >
+            Profil
+            <span aria-hidden="true">&rarr;</span>
+          </NavLink>
         </div>
       </nav>
 
@@ -182,7 +208,7 @@ const Header = () => {
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Log in
+                  Profil
                 </a>
               </div>
             </div>

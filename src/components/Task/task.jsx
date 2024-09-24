@@ -1,6 +1,6 @@
 import React from "react";
 
-const Task = () => {
+const Task = ({ taskName }) => {
   return (
     <li className="flex justify-center gap-x-6 py-5">
       <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
@@ -28,7 +28,7 @@ const Task = () => {
                   className="text-base font-semibold leading-6 text-gray-900"
                   id="modal-title"
                 >
-                  Tâche XXXX
+                  Tâche {taskName}
                 </h3>
                 <div className="mt-2">
                   <p className="text-sm text-gray-500">

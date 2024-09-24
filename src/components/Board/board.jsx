@@ -1,39 +1,43 @@
 import List from "components/List/list";
-import Task from "components/Task/task";
 import React from "react";
 const Board = () => {
+  const tasksListToDo = [
+    { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
+    { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
+    { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
+    { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
+    { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
+  ];
+
+  const tasksLitDoing = [
+    { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
+    { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
+    { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
+    { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
+    { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
+  ];
+
+  const tasksListDone = [
+    { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
+    { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
+    { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
+    { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
+    { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
+  ];
   return (
     <div className="flex flex-col">
       <div className="flex">
         <div className="w-1/3">
           à faire
-          <List>
-            <Task />
-            <Task />
-            <Task />
-            <Task />
-            <Task />
-            <Task />
-          </List>
+          <List taskArray={tasksListToDo} />
         </div>
         <div className="w-1/3">
           en cours
-          <List>
-            <Task />
-            <Task />
-            <Task />
-          </List>
+          <List taskArray={tasksLitDoing} />
         </div>
         <div className="w-1/3">
           terminé
-          <List>
-            <Task />
-            <Task />
-            <Task />
-            <Task />
-            <Task />
-            <Task />
-          </List>
+          <List taskArray={tasksListDone} />
         </div>
       </div>
     </div>
