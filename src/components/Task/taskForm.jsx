@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-const ModalTask = ({ setModalVisible }) => {
+const ModalTask = ({ setModalVisible, setTaskList }) => {
   const modalRef = useRef(null);
   useEffect(() => {
     const handleClickOutside = (event) => {

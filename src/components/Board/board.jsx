@@ -69,7 +69,12 @@ const Board = () => {
           />
         </div>
       </div>
-      <ModalTask setModalVisible={modalVisible} />
+      {modalVisible && (
+        <ModalTask
+          setModalVisible={setModalVisible}
+          setTaskList={setTaskList}
+        />
+      )}
     </div>
   );
 };
