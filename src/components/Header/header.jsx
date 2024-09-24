@@ -1,3 +1,4 @@
+import MouseTracker from "components/MouseTracker/mouseTracker";
 import useMousePosition from "hooks/MousePosition/mousePosition";
 import React from "react";
 import { NavLink } from "react-router-dom";
@@ -75,11 +76,7 @@ const Header = ({ connectChange, isChecked }) => {
             About
           </NavLink>
 
-          <div>
-            <p>
-              ({x}, {y})
-            </p>
-          </div>
+          <MouseTracker />
           <div
             className="text-sm w-12 h-6 bg-gray-900 rounded-full"
             onClick={connectChange}

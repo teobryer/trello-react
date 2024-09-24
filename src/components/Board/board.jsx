@@ -17,13 +17,7 @@ const Board = () => {
     { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
   ];
 
-  const tasksListDone = [
-    { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
-    { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
-    { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
-    { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
-    { taskName: "t1", description: "grjjhiyjihjihijiythjhijh" },
-  ];
+  const tasksListDone = [];
   return (
     <div className="flex flex-col">
       <div className="flex">
