@@ -68,25 +68,6 @@ const Task = ({ task, index }) => {
                 </div>
               </div>
               <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                {task.state !== TaskState.Done && (
-                  <button
-                    onClick={handleAvancer}
-                    type="button"
-                    className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                  >
-                    Avancer {task.id}
-                  </button>
-                )}
-
-                {task.state !== TaskState.Todo && (
-                  <button
-                    type="button"
-                    onClick={handleReculer}
-                    className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                  >
-                    Reculer
-                  </button>
-                )}
                 <button
                   type="button"
                   className="absolute top-3 z-10 right-3 text-gray-500 hover:text-gray-800"
