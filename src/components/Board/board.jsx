@@ -1,6 +1,8 @@
 import List from "components/List/list";
 import ModalTask from "components/Task/taskForm";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { Reducers } from "store";
 
 export const TaskState = {
   Todo: "Todo",
@@ -9,84 +11,9 @@ export const TaskState = {
 };
 const Board = () => {
   const [modalVisible, setModalVisiblee] = useState(false);
-  const [tasksList, setTaskList] = useState([
-    {
-      id: 4,
-      taskName: "Planifier un voyage à Bali",
-      description:
-        "Réserver les vols, trouver un hébergement, établir un itinéraire",
-      state: TaskState.Todo,
-      dueDate: new Date("2024-12-25"),
-      priority: "Haute",
-      tags: ["Voyage", "Asie"],
-    },
-    {
-      id: 5,
-      taskName: "Apprendre à jouer de la guitare",
-      description: "S'entraîner 30 minutes par jour, suivre des cours en ligne",
-      state: TaskState.Doing,
-      dueDate: null,
-      priority: "Moyenne",
-      tags: ["Loisir", "Musique"],
-    },
-    {
-      id: 6,
-      taskName: "Rénover la salle de bain",
-      description:
-        "Choisir les carreaux, trouver un artisan, établir un budget",
-      state: TaskState.Todo,
-      dueDate: new Date("2025-03-31"),
-      priority: "Haute",
-      tags: ["Maison", "Bricolage"],
-    },
-    {
-      id: 7,
-      taskName: "Écrire un roman",
-      description:
-        "Définir les personnages, créer l'intrigue, écrire au moins 500 mots par jour",
-      state: TaskState.Todo,
-      dueDate: null,
-      priority: "Basse",
-      tags: ["Créativité", "Écriture"],
-    },
-    {
-      id: 8,
-      taskName: "Organiser une fête d'anniversaire surprise",
-      description:
-        "Choisir un thème, envoyer les invitations, préparer le gâteau",
-      state: TaskState.Doing,
-      dueDate: new Date("2024-11-15"),
-      priority: "Haute",
-      tags: ["Événement", "Famille"],
-    },
-    {
-      id: 9,
-      taskName: "Faire les courses",
-      description: "Acheter du lait, des œufs et des légumes",
-      state: TaskState.Done,
-      dueDate: new Date("2024-11-10"),
-      priority: "Moyenne",
-      tags: ["Maison", "Courses"],
-    },
-    {
-      id: 10,
-      taskName: "Réparer la fuite d'eau",
-      description: "Appeler un plombier",
-      state: TaskState.Done,
-      dueDate: new Date("2024-11-05"),
-      priority: "Haute",
-      tags: ["Maison", "Réparations"],
-    },
-    {
-      id: 11,
-      taskName: "Lire le chapitre 3 du livre",
-      description: "Terminer avant vendredi",
-      state: TaskState.Done,
-      dueDate: new Date("2024-11-12"),
-      priority: "Moyenne",
-      tags: ["Études", "Lecture"],
-    },
-  ]);
+  const tasksList = useSelector((state) => state[Reducers.TASKS].value);
+
+  console.log("tasksList", tasksList);
 
   const handleCreateTask = () => {
     setModalVisiblee(true);
@@ -120,13 +47,7 @@ const Board = () => {
           />
         </div>
       </div>
-      {modalVisible && (
-        <ModalTask
-          setModalVisible={setModalVisiblee}
-          setTaskList={setTaskList}
-          tasksList={tasksList}
-        />
-      )}
+      {modalVisible && <ModalTask setModalVisible={setModalVisiblee} />}
     </div>
   );
 };

@@ -1,7 +1,8 @@
 import { TaskState } from "components/Board/board";
 import React, { useEffect, useRef } from "react";
-
-const ModalTask = ({ setModalVisible, setTaskList, tasksList }) => {
+import { useDispatch } from "react-redux";
+import { addTask } from "taskSlice";
+const ModalTask = ({ setModalVisible }) => {
   const modalTaskRef = useRef(null);
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -41,11 +42,7 @@ const ModalTask = ({ setModalVisible, setTaskList, tasksList }) => {
             >
               <div className="sm:items-start">
                 <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                  <TaskFrom
-                    setVisible={setModalVisible}
-                    setTaskList={setTaskList}
-                    tasksList={tasksList}
-                  />
+                  <TaskFrom setVisible={setModalVisible} />
                 </div>
               </div>
             </div>
@@ -58,27 +55,24 @@ const ModalTask = ({ setModalVisible, setTaskList, tasksList }) => {
 
 export default ModalTask;
 
-const TaskFrom = ({ setTaskList, tasksList, setVisible }) => {
+const TaskFrom = ({ setVisible }) => {
   const taskNameRef = useRef(null);
   const stateRef = useRef(null);
   const descriptionRef = useRef(null);
 
+  const dispatch = useDispatch();
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Nom:", taskNameRef.current.value);
-    console.log("état:", stateRef.current.value);
-    console.log("description:", descriptionRef.current.value);
-
-    setTaskList([
-      ...tasksList,
-      {
+    dispatch(
+      addTask({
         taskName: taskNameRef.current.value,
         state: stateRef.current.value,
         description: descriptionRef.current.value,
-      },
-    ]);
+      })
+    );
+
     setVisible(false);
-    console.log(tasksList);
   };
 
   const cancel = (event) => {
