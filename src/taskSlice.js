@@ -98,7 +98,10 @@ export const taskSlice = createSlice({
       state.value.push(payload.payload);
     },
     removeTask: (state, payload) => {
-      state.value = state.value.filter((t) => t != payload);
+      console.log("REMOVE TASK");
+      state.value = state.value.filter((t) => t.id != payload.payload.id);
+      console.log();
+      console.log(payload);
     },
   },
 });

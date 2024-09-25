@@ -1,7 +1,9 @@
 import { TaskState } from "components/Board/board";
 import React from "react";
-
+import { useDispatch } from "react-redux";
+import { removeTask } from "taskSlice";
 const Task = ({ task }) => {
+  const dispatch = useDispatch();
   const handleAvancer = () => {
     if (task.state == TaskState.Todo) {
       task.state = TaskState.Doing;
@@ -75,6 +77,31 @@ const Task = ({ task }) => {
                 Reculer
               </button>
             )}
+            <button
+              type="button"
+              className="absolute top-3 z-10 right-3 text-gray-500 hover:text-gray-800"
+              onClick={() => dispatch(removeTask(task))}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="h-6 w-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 6l12 12"
+                />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
