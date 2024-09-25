@@ -103,8 +103,20 @@ export const taskSlice = createSlice({
       console.log();
       console.log(payload);
     },
+    updateTaskState: (state, action) => {
+      const taskIndex = state.value.findIndex(
+        (task) => task.id.toString() === action.payload.draggableId
+      );
+
+      if (taskIndex !== -1) {
+        state.value[taskIndex] = {
+          ...state.value[taskIndex],
+          state: action.payload.destination.droppableId,
+        };
+      }
+    },
   },
 });
 
-export const { addTask, removeTask } = taskSlice.actions;
+export const { addTask, removeTask, updateTaskState } = taskSlice.actions;
 export default taskSlice.reducer;

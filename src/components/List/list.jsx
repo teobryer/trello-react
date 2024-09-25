@@ -9,7 +9,7 @@ const List = (props) => {
       className="rounded-lg bg-blue-100 text-left shadow-xl pb-4 m-5"
     >
       {props.taskArray.map((t, index) => (
-        <Task key={index} task={t} />
+        <Task key={t.id} task={t} index={index} />
       ))}
     </ul>
   ) : (

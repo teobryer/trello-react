@@ -66,6 +66,7 @@ const TaskFrom = ({ setVisible }) => {
     event.preventDefault();
     dispatch(
       addTask({
+        id: Date.now().toString(),
         taskName: taskNameRef.current.value,
         state: stateRef.current.value,
         description: descriptionRef.current.value,
